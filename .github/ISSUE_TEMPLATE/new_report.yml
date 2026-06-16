@@ -1,0 +1,20 @@
+name: New report proposal
+description: Suggest a new report to add to the monorepo
+labels: [enhancement, new-report]
+body:
+  - type: input
+    attributes:
+      label: Proposed report name
+      placeholder: e.g. Deposits & Balances
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Business purpose & key questions
+      description: Who is it for, and what decisions should it support?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Data needed (synthetic only)
+      description: Which tables / fields? Only dummy / AI-generated data is allowed in this repo.

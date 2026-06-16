@@ -1,0 +1,22 @@
+name: Bug report
+description: Something in a report, model, or the tooling is wrong
+labels: [bug]
+body:
+  - type: input
+    attributes:
+      label: Which report / folder?
+      placeholder: reports/01-branch-channel-performance
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: What happened?
+      description: Include `validate_pbip` / `tmdl-validate` output or the Power BI Desktop error if relevant.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected behavior
+  - type: input
+    attributes:
+      label: Power BI Desktop version (if applicable)

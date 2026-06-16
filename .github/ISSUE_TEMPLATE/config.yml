@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Learn analytics with Datapot
+    url: https://datapot.edu.vn
+    about: Courses on SQL, Power BI, data modeling, and the Microsoft data platform.
+  - name: Security / data-exposure concern
+    url: https://github.com/DatapotAnalytics/datapot-fabric-agent-demo/blob/main/SECURITY.md
+    about: Please report suspected real data or leaked secrets privately (see SECURITY.md).

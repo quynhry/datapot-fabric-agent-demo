@@ -79,9 +79,9 @@ After any TMDL edit, run `tmdl-validate` **and** re-read for the rules above (th
 
 ## ⚠️ Known environment caveat (non-ASCII path)
 
-This clone is under `C:\Users\HoàngTôMạnh\...`. The pbip plugin's PostToolUse hooks
-(`validate-pbir.sh`, `validate-report-binding.sh`) can fail to read files on paths with
-diacritics and then report **false** "missing required fields / no byPath" errors when you
+If your local clone path contains **non-ASCII characters (e.g. accented letters) or spaces**, the
+pbip plugin's PostToolUse hooks (`validate-pbir.sh`, `validate-report-binding.sh`) can fail to read
+files on that path and then report **false** "missing required fields / no byPath" errors when you
 `Write`/`Edit` `.pbir` or `.Report/**` files.
 
 - These are **false positives** — the file is fine if `jq empty <file>` passes and

@@ -1,0 +1,37 @@
+# Normalize line endings so PBIP text stays diff-able and valid across OSes.
+# Power BI Desktop's TMDL parser requires LF; a CRLF/BOM can break parsing.
+
+* text=auto eol=lf
+
+# --- Power BI Project (PBIP) text artifacts: ALWAYS LF, never CRLF ---
+*.tmdl     text eol=lf
+*.pbir     text eol=lf
+*.pbip     text eol=lf
+*.pbism    text eol=lf
+*.platform text eol=lf
+*.json     text eol=lf
+*.bim      text eol=lf
+
+# --- Docs / config ---
+*.md   text eol=lf
+*.svg  text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+*.sh   text eol=lf
+
+# --- Binary assets: never line-ending convert, never text-diff ---
+*.xlsx    binary
+*.xls     binary
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.ico     binary
+*.pbix    binary
+*.abf     binary
+*.parquet binary
+*.zip     binary
+
+# --- Bundled dummy dataset: keep bytes as-is (don't rewrite 99 MB), collapse in diffs ---
+reports/*/dataset/raw/** -text linguist-generated=true
+reports/*/dataset/samples/** linguist-generated=true
