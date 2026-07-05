@@ -8,8 +8,6 @@
 - Types: `int64`, `double`, `string`, `date`, `dateTime`, `boolean`.
 - Key: `PK` = primary key, `FK` = foreign key, `–` = attribute.
 
----
-
 ## Quan hệ giữa các bảng (Relationships — đã xác thực referential integrity)
 
 ```
@@ -21,7 +19,7 @@ Customer.ZipCode  ──n:1──> Geo.Zip
 Budget (Category, Segment) ──n:1──> Product (Category, Segment)  [lookup join, không phải FK cột đơn]
 ```
 
-> ⚠️ **Date gap:** Sales có data từ `2015-01-01` nhưng Date dimension chỉ bắt đầu từ `2016-01-01`.
+> **Date gap:** Sales có data từ `2015-01-01` nhưng Date dimension chỉ bắt đầu từ `2016-01-01`.
 > Các giao dịch năm 2015 (~1 năm đầu) **sẽ không join được** với Date dimension.
 > Cần quyết định: (a) mở rộng Date dimension về 2015, hoặc (b) ghi chú phạm vi có thể drill-down = 2016–2020.
 > Xem thêm `data-gap-questions.md`.
@@ -44,7 +42,7 @@ Budget (Category, Segment) ──n:1──> Product (Category, Segment)  [lookup
 | Quarter | `Quarter` | string | – | no | Quý trong năm | `Q1` |
 | Year | `Year` | int64 | – | no | Năm | `2021` |
 
----
+
 
 ## Table: `Campaign`  *(dimension)*
 
@@ -58,7 +56,7 @@ Budget (Category, Segment) ──n:1──> Product (Category, Segment)  [lookup
 | Traffic Channel | `TrafficChannel` | string | – | no | Kênh lưu lượng | `Organic Search` |
 | Device | `Device` | string | – | no | Thiết bị | `Desktop` |
 
----
+
 
 ## Table: `Customer`  *(dimension)*
 
@@ -71,7 +69,6 @@ Budget (Category, Segment) ──n:1──> Product (Category, Segment)  [lookup
 | Zip Code | `ZipCode` | int64 | FK → Geo.Zip | yes | Mã bưu chính, dùng để nối sang Geo | `90250` |
 | Email Name | `Email Name` | string | – | no | Chuỗi ghép email + họ tên dạng `(email): Họ, Tên` | `(Meghan.Alexander@xyza.com): Alexander, Meghan` |
 
----
 
 ## Table: `Geo`  *(dimension)*
 
@@ -87,7 +84,6 @@ Budget (Category, Segment) ──n:1──> Product (Category, Segment)  [lookup
 | District | `District` | string | – | no | Khu vực nhỏ hơn Region | `District #07` |
 | Country | `Country` | string | – | no | Quốc gia | `USA` |
 
----
 
 ## Table: `Product`  *(dimension)*
 
@@ -106,7 +102,7 @@ Budget (Category, Segment) ──n:1──> Product (Category, Segment)  [lookup
 | Unit Cost | `Unit Cost` | double | – | yes | Giá vốn 1 đơn vị, cố định theo ProductID | `37.27` |
 | Unit Price | `Unit Price` | double | – | yes | Giá bán 1 đơn vị, cố định theo ProductID | `51.06` |
 
----
+
 
 ## Table: `Sales`  *(fact)*
 
@@ -126,7 +122,7 @@ Budget (Category, Segment) ──n:1──> Product (Category, Segment)  [lookup
 | Campaign ID | `CampaignID` | int64 | FK → Campaign | yes | Nguồn/kênh dẫn đến giao dịch | `22` |
 | Units | `Units` | int64 | – | yes | Luôn = 1 trên toàn bộ dữ liệu | `1` |
 
----
+
 
 ## Table: `Budget / Forecast`  *(fact — wide format, cần unpivot)*
 
@@ -144,7 +140,7 @@ Budget (Category, Segment) ──n:1──> Product (Category, Segment)  [lookup
 | Segment | *(tách từ tên cột, sau dấu `-`)* | string | – | no | Khớp với `Product.Segment` | `Convenience` |
 | Value | *(giá trị ô tương ứng cột Category-Segment)* | double | – | no | Doanh thu mục tiêu/dự báo của tháng cho tổ hợp Category-Segment | `44650.90` |
 
----
+
 
 ## Measures  *(all on `Key Measures`)*
 
@@ -164,6 +160,6 @@ Budget (Category, Segment) ──n:1──> Product (Category, Segment)  [lookup
 | Revenue PY | 03 Growth | `#,0.00` | `CALCULATE([Total Revenue], SAMEPERIODLASTYEAR(Date[Date]))` | Doanh thu cùng kỳ năm ngoái |
 | Revenue YTD | 03 Growth | `#,0.00` | `TOTALYTD([Total Revenue], Date[Date])` | Doanh thu lũy kế từ đầu năm |
 
-> **Lưu ý phạm vi:** Manufacturer hiện là hằng số `VanArsdel` trong toàn bộ Product, nên các measure thị phần/so sánh đối thủ không nằm trong scope phiên bản dashboard này.
+**Lưu ý phạm vi:** Manufacturer hiện là hằng số `VanArsdel` trong toàn bộ Product, nên các measure thị phần/so sánh đối thủ không nằm trong scope phiên bản dashboard này.
 
-> **Lưu ý quan trọng:** `Total Revenue` **không dùng** `SUM` trực tiếp mà phải dùng `SUMX` với `RELATED(Product[Unit Price])` vì Sales không có cột Revenue sẵn.
+**Lưu ý quan trọng:** `Total Revenue` **không dùng** `SUM` trực tiếp mà phải dùng `SUMX` với `RELATED(Product[Unit Price])` vì Sales không có cột Revenue sẵn.

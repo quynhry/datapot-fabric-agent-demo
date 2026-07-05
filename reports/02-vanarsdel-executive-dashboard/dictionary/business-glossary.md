@@ -2,10 +2,7 @@
 
 Định nghĩa các khái niệm nghiệp vụ dùng xuyên suốt bộ tài liệu.
 Chi tiết kỹ thuật cột/kiểu/khóa xem `data-dictionary.md`.
-
----
-
-## 1.1 Segment vs Category - quan hệ phân cấp
+1.1 Segment vs Category - quan hệ phân cấp
 
 Trong dữ liệu VanArsdel, `Category` là cấp cao hơn `Segment`.
 
@@ -26,11 +23,8 @@ Trong dữ liệu VanArsdel, `Category` là cấp cao hơn `Segment`.
 | Urban | Regular | 1 |
 | Youth | Youth | 10 |
 
-Tổng cộng: **212 products**.
-
----
-
-## 1.2 Campaign - kênh và thiết bị
+Tổng cộng: 212 products.
+1.2 Campaign - kênh và thiết bị
 
 `Campaign` trong bộ dữ liệu này không phải chiến dịch marketing theo nghĩa tên/ngân sách/thời gian chạy.
 Mỗi `CampaignID` là một tổ hợp cố định `TrafficChannel x Device`.
@@ -41,9 +35,7 @@ Mỗi `CampaignID` là một tổ hợp cố định `TrafficChannel x Device`.
 
 Lưu ý ETL: cần `TRIM` và sửa lỗi chính tả (`Affliliate`, `Deskop`) trước khi hiển thị dashboard.
 
----
-
-## 1.3 Manufacturer vs Product
+1.3 Manufacturer vs Product
 
 Toàn bộ 212 sản phẩm trong `Product` đều có `Manufacturer = VanArsdel`.
 Hiện không có dữ liệu đối thủ trong dataset.
@@ -52,9 +44,7 @@ Hệ quả nghiệp vụ:
 - Không có ý nghĩa phân tích thị phần/so sánh cạnh tranh theo Manufacturer trong phiên bản dữ liệu này
 - `ManufacturerID` vẫn nên giữ trong model để sẵn sàng mở rộng dữ liệu tương lai
 
----
-
-## 1.4 Đơn vị doanh thu và công thức
+1.4 Đơn vị doanh thu và công thức
 
 Không có cột `Revenue`/`Cost`/`Profit` sẵn trong nguồn, cần tính:
 
@@ -69,9 +59,7 @@ Lưu ý dữ liệu:
 
 Đơn vị tiền tệ chưa được ghi rõ trong nguồn và cần stakeholder xác nhận.
 
----
-
-## 1.5 Các khái niệm khác
+ 1.5 Các khái niệm khác
 
 | Thuật ngữ | Định nghĩa | Ghi chú / nguồn |
 |-----------|------------|-----------------|
@@ -82,9 +70,8 @@ Lưu ý dữ liệu:
 | Forecast Variance | `(Actual - Forecast) / Forecast` | Chưa tính được do thiếu overlap giữa Actual và Forecast |
 | Customers Served | Số khách hàng duy nhất phát sinh giao dịch trong kỳ | `DISTINCTCOUNT(CustomerID)` |
 
----
 
-## 1.6 Time terms
+1.6 Time terms
 
 | Term | Definition |
 |------|------------|

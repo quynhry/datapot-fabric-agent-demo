@@ -5,7 +5,7 @@
 | | |
 |---|---|
 | **Domain** | Retail Sales & Budget |
-| **Status** | 🔴 Scoping |
+| **Status** |  BA Deliverables Finalized |
 | **Owner** | BA candidate |
 | **Audience** | C-level / Sales leadership — theo dõi kinh doanh, ra quyết định phân bổ ngân sách |
 | **Semantic model** | `pbip/VanArsdelExecutive.SemanticModel` (PBIP / TMDL, Import) |
@@ -33,6 +33,14 @@
 4. **Đặc tả report** — mapping KPI → page → visual, định nghĩa measure bằng ngôn ngữ business (không DAX).
 5. **Wireframe** — phác layout để DA hình dung trước khi code.
 
+## Executive summary (30s)
+
+1. Bộ dữ liệu có overlap Actual vs Budget chỉ ở Jan-Jun 2020, nên KPI ngân sách được giới hạn rõ theo kỳ áp dụng.
+2. Tổ hợp `Rural-Productivity` thiếu ngân sách trong nguồn, được loại khỏi KPI budget và gắn footnote tránh hiểu nhầm.
+3. Dataset chỉ có Manufacturer = VanArsdel, nên không triển khai phân tích cạnh tranh trong phiên bản này.
+4. Để đảm bảo tính nhất quán model thời gian, phạm vi hiển thị dashboard chốt từ `2016-01-01` đến `2020-06-30`.
+5. Handoff đã sẵn sàng cho DA: glossary + dictionary + data-gap decision log + BRD + report spec + wireframe annotation.
+
 ## Contents
 
 - `dataset/` — [DATASET-CONTRACT.md](dataset/DATASET-CONTRACT.md)
@@ -42,10 +50,15 @@
 
 ## Status notes
 
-- [ ] Business glossary — draft
-- [ ] Data dictionary — draft
-- [ ] Data gap & questions — draft
-- [ ] BRD — draft
-- [ ] Report spec — draft
-- [ ] Wireframe — draft
-- [ ] PBIP build — not started
+- [x] Business glossary — completed
+- [x] Data dictionary — completed
+- [x] Data gap & questions — completed
+- [x] BRD — completed
+- [x] Report spec — completed
+- [x] Wireframe — completed
+- [ ] PBIP build — optional, not started (nice-to-have)
+
+## Final submission note
+
+This report folder is prepared as a BA handoff package.
+Open data questions are tracked in `dictionary/data-gap-questions.md` and should be resolved with stakeholders before implementation freeze.

@@ -3,7 +3,7 @@
 
 **Version:** 0.1 — Draft  
 **Date:** *(04/07/2026)*  
-**Author:** *(Nguyễn Nh)*  
+**Author:** *(Nguyễn Như Quỳnh)*  
 **Reviewer:** *(tên stakeholder VanArsdel)*
 
 ---
@@ -17,7 +17,7 @@ VanArsdel là công ty bán lẻ cần một **dashboard điều hành** để t
 - Phát hiện nhanh khu vực / sản phẩm / kênh lưu lượng đang dưới hoặc vượt kế hoạch.
 - Theo dõi xu hướng tăng trưởng qua các năm trong phạm vi dữ liệu hợp lệ theo Date dimension.
 
----
+
 
 ## 2. Người dùng & quyết định hỗ trợ
 
@@ -28,7 +28,7 @@ VanArsdel là công ty bán lẻ cần một **dashboard điều hành** để t
 | **Marketing Manager** | Tổ hợp Traffic Channel x Device nào tạo doanh thu hiệu quả nhất? | Tối ưu phân bổ kênh và nội dung |
 | **Regional Manager** | Vùng của tôi đang đứng đâu so với target và so với các vùng khác? | Hành động cụ thể tại địa phương |
 
----
+
 
 ## 3. Câu hỏi nghiệp vụ mà dashboard phải trả lời
 
@@ -40,7 +40,7 @@ VanArsdel là công ty bán lẻ cần một **dashboard điều hành** để t
 6. Dữ liệu hiện có có đủ để so sánh Forecast variance hay không?
 7. Budget attainment hiện tại ở mức nào, và có khả năng đạt mục tiêu năm không?
 
----
+
 
 ## 4. KPI & định nghĩa metric
 
@@ -57,9 +57,9 @@ VanArsdel là công ty bán lẻ cần một **dashboard điều hành** để t
 | **Gross Margin %** | Biên lợi nhuận gộp | `Gross Profit ÷ Revenue` | % | — |
 | **Top N Products** | N sản phẩm có doanh thu cao nhất trong kỳ | Rank by Revenue DESC | — | — |
 
-> ⚠️ **Giả định cần xác nhận:** Revenue = Units × Unit Price phản ánh đúng thực tế kinh doanh (không có discount/tax ẩn), và đơn vị tiền tệ chuẩn của báo cáo.
+**Giả định cần xác nhận:** Revenue = Units × Unit Price phản ánh đúng thực tế kinh doanh (không có discount/tax ẩn), và đơn vị tiền tệ chuẩn của báo cáo.
 
----
+
 
 ## 5. Phạm vi (Scope)
 
@@ -69,6 +69,7 @@ VanArsdel là công ty bán lẻ cần một **dashboard điều hành** để t
 - Đối chiếu Budget Attainment ở giai đoạn có overlap dữ liệu (Jan-Jun 2020).
 - Phân tích theo: thời gian, sản phẩm (Category/Segment), địa lý (Country/State/City), Traffic Channel x Device.
 - Dashboard tĩnh, refresh thủ công.
+- Phạm vi thời gian hiển thị trên dashboard: `2016-01-01` -> `2020-06-30`.
 
 ### Out of scope
 - So sánh cạnh tranh theo Manufacturer (dataset hiện chỉ có VanArsdel).
@@ -77,7 +78,7 @@ VanArsdel là công ty bán lẻ cần một **dashboard điều hành** để t
 - Dự báo tương lai (ML forecast) — chỉ dùng Budget/Forecast có sẵn.
 - Row-level security theo từng Regional Manager *(có thể thêm sau)*.
 
----
+
 
 ## 6. Giả định
 
@@ -86,9 +87,9 @@ VanArsdel là công ty bán lẻ cần một **dashboard điều hành** để t
 3. Đơn vị tiền tệ đồng nhất — chờ stakeholder xác nhận ký hiệu chuẩn.
 4. Budget join với Sales qua Year × Month × Segment × Category.
 5. Dashboard audience chính: C-level và VP Sales.
-6. Date dimension sẽ được mở rộng về 2015 hoặc loại 2015 có chủ đích (theo quyết định stakeholder).
+6. Chốt loại năm 2015 khỏi phiên bản nộp hiện tại để đảm bảo nhất quán với Date dimension.
 
----
+
 
 ## 7. Non-functional requirements
 
@@ -96,3 +97,13 @@ VanArsdel là công ty bán lẻ cần một **dashboard điều hành** để t
 - **Kích thước page:** 1280 × 720 px (16:9).
 - **Theme:** `shared/themes/datapot-theme.json`.
 - **Ngôn ngữ label:** Tiếng Anh (hoặc theo yêu cầu VanArsdel).
+
+
+
+## 8. KPI applicability rules (bắt buộc khi build)
+
+1. **Budget Attainment %** chỉ hiển thị khi kỳ thời gian có overlap Actual vs Budget.
+2. Nếu ngoài kỳ overlap (ví dụ Jul-2020 trở đi), KPI/visual phải hiển thị nhãn `Insufficient overlap` thay vì `0` hoặc blank không giải thích.
+3. **Forecast variance** nằm ngoài scope phiên bản hiện tại và không hiển thị trong dashboard chính.
+4. Visual so sánh ngân sách theo Category-Segment phải có chú thích xử lý tổ hợp thiếu ngân sách (`Rural-Productivity`).
+5. Tất cả visual theo thời gian áp dụng phạm vi từ `2016-01-01` và có ghi chú phạm vi dữ liệu.

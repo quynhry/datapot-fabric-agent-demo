@@ -6,7 +6,7 @@
 - **Decisions supported:** Theo dõi hiệu suất doanh thu vs. ngân sách ở giai đoạn đủ dữ liệu; xác định vùng/sản phẩm/kênh cần hành động
 - **Refresh / latency:** Manual refresh; Import mode
 
----
+
 
 ## Key questions
 
@@ -17,7 +17,7 @@
 5. Tổ hợp Traffic Channel x Device nào tương quan với tăng doanh thu?
 6. Chỉ số nào cần gắn nhãn "không đủ dữ liệu" để tránh hiểu nhầm (Forecast variance, kỳ ngoài overlap)?
 
----
+
 
 ## KPIs
 
@@ -33,7 +33,6 @@
 | Revenue YTD | `[Revenue YTD]` | Budget YTD |
 | Total Units Sold | `[Total Units]` | Volume plan |
 
----
 
 ## Grain & dimensions
 
@@ -46,7 +45,7 @@
   - Campaign: Traffic Channel, Device
   - Type filter: Budget vs. Forecast
 
----
+
 
 ## Pages
 
@@ -62,9 +61,7 @@
 - **Slicers (page-level):** Year (default: latest), Quarter
 - **Data note:** Hiển thị badge "Insufficient overlap" ngoài giai đoạn Jan-Jun 2020 khi user chọn visual so sánh Actual vs Budget.
 
----
-
-### Page 2 — Product Performance
+## Page 2 — Product Performance
 
 - **Purpose:** Drill-down vào hiệu suất theo phân cấp sản phẩm
 - **Audience:** VP Sales, Product team
@@ -74,9 +71,9 @@
   - Waterfall chart: Revenue contribution by Segment — hiển thị contribution và variance
   - Scatter plot: Category performance — X: Revenue, Y: YoY %, size: Units — để identify "stars" vs. "laggards"
 - **Slicers:** Year, Category, Segment
-- **Data note:** `Rural-Productivity` thiếu cột budget; visual so sánh budget cần chú thích rõ logic xử lý.
+- **Data note:** `Rural-Productivity` thiếu cột budget; tạm thời loại khỏi visual/KPI so sánh ngân sách và gắn footnote dữ liệu thiếu.
 
----
+
 
 ### Page 3 — Geographic Performance
 
@@ -89,7 +86,6 @@
   - KPI card: Best performing region · Worst performing region
 - **Slicers:** Year, Country, Segment
 
----
 
 ### Page 4 — Trend & Seasonality
 
@@ -101,9 +97,9 @@
   - Column chart: Monthly YoY % Growth — conditional formatting (positive/negative)
   - Small multiples (nếu hỗ trợ): Revenue by Segment qua từng năm
 - **Slicers:** Segment, Category, Country
-- **Data note:** Nếu Date dimension chưa mở rộng về 2015, phải ẩn năm 2015 khỏi tất cả visual theo thời gian và ghi chú phạm vi báo cáo.
+- **Data note:** Phạm vi hiển thị chốt cho bản nộp là `2016-01-01` đến `2020-06-30`; không hiển thị năm 2015.
 
----
+
 
 ### Page 5 — Traffic Channel Performance
 
@@ -116,7 +112,6 @@
   - KPI cards: Top Channel · Top Device · Share of top channel
 - **Slicers:** Year, Category, Segment, Device
 
----
 
 ### Page 6 — Campaign Analysis
 
@@ -128,7 +123,7 @@
   - Bar chart: Revenue impact before/after standardization group
 - **Slicers:** Year, Traffic Channel, Device
 
----
+
 
 ### Page 7 — Detail (Drill-through)
 
@@ -140,7 +135,7 @@
 - **Slicers:** Kế thừa context từ trang gốc (drill-through filters)
 - **Note:** Không hiển thị trong nav bar mặc định — chỉ accessible qua right-click → drill-through
 
----
+
 
 ## Filters
 
@@ -148,7 +143,7 @@
 - **Page-level:** Xem từng page ở trên
 - **Cross-report drill-through:** Detail page nhận filters từ mọi page
 
----
+
 
 ## Design notes
 
@@ -159,3 +154,14 @@
 - **Fact columns:** Ẩn tất cả cột fact (Revenue, Units, keys) — chỉ expose qua measures.
 - **Tooltip:** KPI cards có tooltip giải thích định nghĩa metric.
 - **Language:** Labels và tooltips bằng tiếng Anh.
+
+
+
+## KPI applicability policy
+
+1. `Budget Attainment %`, `Variance vs Budget`, `Variance % vs Budget` chỉ hiển thị khi có overlap Actual vs Budget.
+2. Giai đoạn mặc định có overlap đã xác thực: Jan-Jun 2020.
+3. Ngoài giai đoạn overlap, thay vì hiển thị `0` hoặc blank không nhãn, visual phải hiển thị trạng thái `Insufficient overlap`.
+4. `Forecast variance` không thuộc scope phiên bản hiện tại và không đưa vào KPI cards.
+5. Khi visual chứa tổ hợp thiếu ngân sách (`Rural-Productivity`), bắt buộc có footnote mô tả cách xử lý (exclude hoặc gán giá trị theo quyết định stakeholder).
+6. Phạm vi thời gian áp dụng toàn report: `2016-01-01` đến `2020-06-30`.

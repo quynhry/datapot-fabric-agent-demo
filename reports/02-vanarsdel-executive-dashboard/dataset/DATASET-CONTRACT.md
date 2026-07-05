@@ -4,12 +4,12 @@
 
 | File | Sheet / Tab | Rows (approx) | Period | Notes |
 |------|-------------|--------------|--------|-------|
-| `VanArsdel_Actuals.xlsx` | `Date` | — | 2015–2020 | Date dimension |
+| `VanArsdel_Actuals.xlsx` | `Date` | — | 2016–2020 | Date dimension |
 | `VanArsdel_Actuals.xlsx` | `Campaign` | — | — | Campaign/marketing dimension |
 | `VanArsdel_Actuals.xlsx` | `Customer` | — | — | Customer dimension |
 | `VanArsdel_Actuals.xlsx` | `Product` | — | — | Product hierarchy dimension |
 | `VanArsdel_Actuals.xlsx` | `Geo` | — | — | Geography dimension |
-| `VanArsdel_Actuals.xlsx` | `Sales` | ~675 000 | 2015–2020 | Fact table — actual sales |
+| `VanArsdel_Actuals.xlsx` | `Sales` | ~675 000 | 2016–2020 | Fact table — actual sales |
 | `VanArsdel_Budget_Forecast.xlsx` | *(main sheet)* | — | TBD | Budget & forecast — wide format |
 
 ## How to load
